@@ -65,7 +65,9 @@
       "flowtype"
     ],
     "ignore": [
-      "/flow-typed/*"
+      "/flow-typed/*",
+      "/scripts",
+      "/config"
     ],
     "parser": "babel-eslint"
   },
