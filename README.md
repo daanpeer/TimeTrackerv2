@@ -4,7 +4,9 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 ## TODO
 - [ ] Firebase authentication
 - [ ] Store description per timer
-- [ ] Deploy to S3
+- [x] Deploy to S3
 - [ ] Add Helmet lib for title
 - [ ] Add own favicon
 - [ ] Update color scheme
+- [ ] Add manifest
+- [ ] Configure SW
