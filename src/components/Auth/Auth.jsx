@@ -27,7 +27,6 @@ const Container = styled.div`
 `
 
 export default class Auth extends Component {
-
   state: {
     error: bool
   }
@@ -55,7 +54,7 @@ export default class Auth extends Component {
       .then((result) => {
         this.props.history.push('/')
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({ error: true })
       })
   }

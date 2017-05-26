@@ -3,6 +3,9 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 
 ## TODO
 - [x] Firebase authentication
+- [ ] Add manifest
+- [ ] Implement the functionality to remove a timer
+- [ ] Implement the functionality to switch dates
 - [ ] Store description per timer
 - [x] Deploy to S3
 - [ ] Add Helmet lib for title
