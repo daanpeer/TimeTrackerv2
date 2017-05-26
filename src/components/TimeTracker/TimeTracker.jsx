@@ -6,6 +6,7 @@ import TimerList from './components/TimerList'
 import TimerBar from './components/TimerBar'
 import type { Timer } from '../../types/Timer'
 import { spinner } from '../../helpers'
+import Toolbar from '../Toolbar'
 
 const Container = styled.div`
   display: flex;
@@ -67,21 +68,24 @@ class TimeTracker extends Component {
     } = this.props
 
     return (
-      <Container>
-        {timers.length !== 0 && (
-          <div>
-            <TimerBar
-              timers={timers}
-            />
-            <TimerList
-              timers={timers}
-              onStartTimer={onStartTimer}
-              onStopTimer={onStopTimer}
-            />
-          </div>
-        )}
-        <Button onClick={onAddTimer}>Start a new timer</Button>
-      </Container>
+      <div>
+        <Toolbar />
+        <Container>
+          {timers.length !== 0 && (
+            <div>
+              <TimerBar
+                timers={timers}
+              />
+              <TimerList
+                timers={timers}
+                onStartTimer={onStartTimer}
+                onStopTimer={onStopTimer}
+              />
+            </div>
+          )}
+          <Button onClick={onAddTimer}>Start a new timer</Button>
+        </Container>
+      </div>
     )
   }
 }

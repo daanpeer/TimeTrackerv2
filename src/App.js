@@ -2,8 +2,14 @@
 import React from 'react'
 import styled, { ThemeProvider, injectGlobal } from 'styled-components'
 
-import Toolbar from './components/Toolbar'
 import TimeTracker from './components/TimeTracker'
+import Auth from './components/Auth'
+import PrivateRoute from './components/PrivateRoute'
+
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
 // eslint-disable-next-line
 injectGlobal`
@@ -41,8 +47,12 @@ const theme = {
 const App = () => (
   <ThemeProvider theme={theme}>
     <Container>
-      <Toolbar />
-      <TimeTracker />
+      <Router>
+        <div>
+          <Route exact path='/auth' component={Auth} />
+          <PrivateRoute path='/' component={TimeTracker} />
+        </div>
+      </Router>
     </Container>
   </ThemeProvider>
 )

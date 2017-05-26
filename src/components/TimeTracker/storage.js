@@ -3,14 +3,21 @@ import firebase from '../../firebase'
 import type { Timer } from '../../types/Timer'
 import { diffInSeconds } from '../../helpers'
 
-const database = firebase.database()
-const timetracker = database.ref('timetracker')
-
-const timers = database.ref('timetracker/timers')
-
 export default class TimeTrackerStorage {
-  onInitialTimers = (callback: (timers: ?{ [string]: Timer }, runningTimer: ?string) => void) => {
-    timetracker.on('value', (ref) => {
+  uid: string
+  timersRef: string
+  timetrackerRef: string
+  database: Object
+
+  constructor (uid: string) {
+    this.uid = uid
+    this.database = firebase.database()
+    this.timetrackerRef = `/timetracker/${this.uid}`
+    this.timersRef = `${this.timetrackerRef}/timers`
+  }
+
+  onTimetrackerChange = (callback: (timers: ?{ [string]: Timer }, runningTimer: ?string) => void) => {
+    this.database.ref(this.timetrackerRef).on('value', (ref) => {
       const data = ref.val()
       if (data === null) {
         return callback()
@@ -20,57 +27,39 @@ export default class TimeTrackerStorage {
     })
   }
 
-  onTimerChanged = (callback: ({ [string]: Timer }) => void) => {
-    timers.on('child_changed', (ref) => {
-      const timer = { [ref.key]: ref.val() }
-      callback(timer)
-    })
-  }
-
-  onTimerAdded = (callback: ({ [string]: Timer }) => void) => {
-    timers.on('child_added', (ref) => {
-      const timer = { [ref.key]: ref.val() }
-      callback(timer)
-    })
-  }
-
   addTimer = () => {
-    timers.push({
+    this.database.ref(this.timersRef).push({
       seconds: 0,
       startDate: null
     })
   }
 
-  startTimer = (id: string, runningTimer: ?Timer) => {
-    if (runningTimer !== undefined && runningTimer !== null) {
-      let seconds
-      if (runningTimer) {
-        seconds = diffInSeconds(new Date(runningTimer.startDate || new Date()), new Date()) + runningTimer.seconds
-      }
-
-      database.ref(`timetracker/timers/${runningTimer.id}`).update({
-        startDate: null,
-        seconds: seconds === undefined ? seconds : runningTimer.seconds
-      })
+  startTimer = (id: string, runningTimerId: string, runningTimer: ?Timer) => {
+    if (runningTimer !== null && runningTimer !== undefined) {
+      this.stopTimer(runningTimerId, runningTimer, true)
     }
 
-    database.ref(`timetracker/timers/${id}`).update({
+    this.database.ref(`${this.timersRef}/${id}`).update({
       startDate: new Date().toString()
     })
 
-    database.ref('timetracker').update({
+    this.database.ref(`${this.timetrackerRef}`).update({
       runningTimer: id
     })
   }
 
+  updateTime = (id: string, timer: Timer, resetDate: bool = false) => {
+    this.database.ref(`${this.timersRef}/${id}`).update({
+      startDate: resetDate ? null : new Date(timer.startDate || new Date()),
+      seconds: diffInSeconds(new Date(timer.startDate || new Date()), new Date()) + timer.seconds
+    })
+  }
+
   stopTimer = (id: string, timer: Timer) => {
-    database.ref('timetracker').update({
+    this.database.ref(`${this.timersRef}/${id}`).update({
       runningTimer: null
     })
 
-    database.ref(`timetracker/timers/${id}`).update({
-      startDate: null,
-      seconds: diffInSeconds(new Date(timer.startDate), new Date()) + timer.seconds
-    })
+    this.updateTime(id, timer, true)
   }
 }

@@ -10,3 +10,4 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 - [ ] Update color scheme
 - [ ] Add manifest
 - [ ] Configure SW
+- [ ] Enable gzip compression in amazon

@@ -1,3 +1,4 @@
+/* @flow */
 import TimeTracker from './container'
 
 export {

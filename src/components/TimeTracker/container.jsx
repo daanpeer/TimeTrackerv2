@@ -4,8 +4,6 @@ import TimeTrackerComponent from './TimeTracker'
 import type { Timer } from '../../types'
 import TimerStorage from './storage'
 
-const timerStorage = new TimerStorage()
-
 class TimeTracker extends Component {
   handleStopTimer = () => {}
   handleStartTimer = () => {}
@@ -18,6 +16,8 @@ class TimeTracker extends Component {
     runningTimer: ?string,
   }
 
+  timerStorage: Object
+
   constructor (props: Object) {
     super(props)
 
@@ -27,40 +27,36 @@ class TimeTracker extends Component {
       timers: {},
       runningTimer: undefined
     }
+
+    this.timerStorage = new TimerStorage(props.user.uid)
+  }
+
+  updateTimetrackerState = (timers: { [string]: Timer }, runningTimer: string) => {
+    this.setState({ loading: false, timers, runningTimer })
   }
 
   componentDidMount () {
-    timerStorage.onInitialTimers((timers, runningTimer) => {
-      this.setState({ loading: false, timers, runningTimer })
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        if (this.state.runningTimer !== undefined && this.state.runningTimer !== null) {
+          const timer = this.state.timers[this.state.runningTimer]
+          if (timer) {
+            this.timerStorage.updateTime(this.state.runningTimer, timer)
+          }
+        }
+      }
     })
 
-    timerStorage.onTimerAdded((timer) => {
-      this.setState({
-        timers: {
-          ...this.state.timers,
-          timer
-        }
-      })
-    })
-
-    timerStorage.onTimerChanged((timer) => {
-      console.log('changed', timer)
-      this.setState({
-        timers: {
-          ...this.state.timers,
-          timer
-        }
-      })
-    })
+    this.timerStorage.onTimetrackerChange(this.updateTimetrackerState)
   }
 
   handleAddTimer = () => {
-    timerStorage.addTimer()
+    this.timerStorage.addTimer()
   }
 
   handleStopTimer = (id: string) => {
     // get the timer from the object
-    timerStorage.stopTimer(id, this.state.timers[id])
+    this.timerStorage.stopTimer(id, this.state.timers[id])
     this.setState({ runningTimer: null })
   }
 
@@ -70,8 +66,7 @@ class TimeTracker extends Component {
       runningTimer = this.state.timers[this.state.runningTimer]
     }
 
-    timerStorage.startTimer(id, runningTimer)
-
+    this.timerStorage.startTimer(id, this.state.runningTimer, runningTimer)
     this.setState({
       runningTimer: id
     })
