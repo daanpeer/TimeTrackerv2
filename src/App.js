@@ -27,6 +27,7 @@ const Container = styled.div`
 const theme = {
   primaryColor: '#2980b9',
   secondaryColor: '#2980b9',
+  dangerColor: '#c0392b',
   timerColor: (index: number) => {
     const colors = [
       '#e74c3c',

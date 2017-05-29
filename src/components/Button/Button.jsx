@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 const Button = styled.a`
-  background-color: ${props => props.theme.secondaryColor};
+  background-color: ${props => props.danger ? props.theme.dangerColor : props.theme.secondaryColor};
   border: 0px;
-  border-radius: 3px;
+  border-radius: 2px;
   color: #fff;
   padding-left: 10px;
   padding-right: 10px;

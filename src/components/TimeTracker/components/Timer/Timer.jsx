@@ -93,7 +93,7 @@ export default class Timer extends Component {
       <Container>
         <Time seconds={this.props.seconds} />
         <ActionContainer>
-          <Button>
+          <Button danger>
             <span aria-label='delete' role='img'>🗑️</span> Delete
           </Button>
           <Spacing />
