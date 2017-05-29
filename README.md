@@ -12,6 +12,6 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 - [ ] Add own favicon
 - [ ] Update color scheme
 - [ ] Add manifest
-- [ ] Configure SW
-- [ ] Enable gzip compression in amazon
+- [x] Configure SW
+- [x] Enable gzip compression in amazon
 - [ ] Move google auth to a separate component
