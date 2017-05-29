@@ -55,6 +55,10 @@ export default class TimeTrackerStorage {
     })
   }
 
+  deleteTimer = (id: string) => {
+    this.database.ref(`${this.timersRef}/${id}`).remove()
+  }
+
   stopTimer = (id: string, timer: Timer) => {
     this.database.ref(`${this.timersRef}/${id}`).update({
       runningTimer: null

@@ -38,6 +38,7 @@ export default class Timer extends Component {
     onStartTimer: () => void,
     onStopTimer: () => void,
     onTick: () => void,
+    onDeleteTimer: () => void,
   }
 
   state: {
@@ -93,7 +94,7 @@ export default class Timer extends Component {
       <Container>
         <Time seconds={this.props.seconds} />
         <ActionContainer>
-          <Button danger>
+          <Button onClick={this.props.onDeleteTimer} danger>
             <span aria-label='delete' role='img'>🗑️</span> Delete
           </Button>
           <Spacing />

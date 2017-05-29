@@ -21,6 +21,7 @@ type TimeTrackerProps = {
   onAddTimer: () => void,
   onStopTimer: (id: string) => void,
   onStartTimer: (id: string) => void,
+  onDeleteTimer: (id: string) => void,
   onTick: (id: string) => void,
   running: bool,
 }
@@ -40,6 +41,7 @@ export default class TimeTracker extends Component {
       onStartTimer,
       onStopTimer,
       onAddTimer,
+      onDeleteTimer,
       onTick
     } = this.props
 
@@ -56,6 +58,7 @@ export default class TimeTracker extends Component {
                 timers={timers}
                 onStartTimer={onStartTimer}
                 onStopTimer={onStopTimer}
+                onDeleteTimer={onDeleteTimer}
                 onTick={onTick}
               />
             </div>

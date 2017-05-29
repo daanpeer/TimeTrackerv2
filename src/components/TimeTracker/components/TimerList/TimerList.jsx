@@ -11,12 +11,14 @@ const TimerList = ({
   timers,
   onStopTimer,
   onStartTimer,
-  onTick
+  onTick,
+  onDeleteTimer
 }: {
   timers: Array<Timer>,
   onStopTimer: (id: string) => void,
   onStartTimer: (id: string) => void,
-  onTick: (id: string) => void
+  onTick: (id: string) => void,
+  onDeleteTimer: (id: string) => void
 }) => (
   <Container>
     {timers.map((timer, key) => (
@@ -26,6 +28,7 @@ const TimerList = ({
         running={timer.startDate !== undefined}
         onStartTimer={() => { onStartTimer(timer.id) }}
         onStopTimer={() => { onStopTimer(timer.id) }}
+        onDeleteTimer={() => { onDeleteTimer(timer.id) }}
         onTick={() => { onTick(timer.id) }}
       />
     ))}

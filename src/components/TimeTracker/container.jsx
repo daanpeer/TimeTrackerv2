@@ -83,6 +83,10 @@ class TimeTracker extends Component {
     })
   }
 
+  handleDeleteTimer = (id: string) => {
+    this.timerStorage.deleteTimer(id)
+  }
+
   render () {
     if (this.state.loading) {
       return null
@@ -100,6 +104,7 @@ class TimeTracker extends Component {
       onStopTimer={this.handleStopTimer}
       onStartTimer={this.handleStartTimer}
       onAddTimer={this.handleAddTimer}
+      onDeleteTimer={this.handleDeleteTimer}
       onTick={this.handleTick}
       running={this.state.runningTimer !== undefined}
     />)
