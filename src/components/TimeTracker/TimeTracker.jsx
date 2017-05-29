@@ -5,12 +5,15 @@ import Button from '../Button'
 import TimerList from './components/TimerList'
 import TimerBar from './components/TimerBar'
 import type { Timer } from '../../types/Timer'
-import { spinner } from '../../helpers'
 import Toolbar from '../Toolbar'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+const ActionContainer = styled.div`
+  padding: 10px;
 `
 
 type TimeTrackerProps = {
@@ -21,7 +24,7 @@ type TimeTrackerProps = {
   running: bool,
 }
 
-class TimeTracker extends Component {
+export default class TimeTracker extends Component {
   props: TimeTrackerProps
 
   static defaultProps = {
@@ -29,35 +32,6 @@ class TimeTracker extends Component {
   }
 
   timer: ?number
-
-  constructor (props: TimeTrackerProps) {
-    super(props)
-
-    this.initTimer(props)
-  }
-
-  initTimer = (props: { running: bool }) => {
-    const title = 'TimeTracker'
-    if (props.running) {
-      if (this.timer) {
-        return
-      }
-
-      this.timer = spinner((value) => {
-        document.title = `${value} TimeTracker`
-      }, 250)
-    } else {
-      if (this.timer !== undefined && this.timer !== null) {
-        clearInterval(this.timer)
-        this.timer = undefined
-      }
-      document.title = title
-    }
-  }
-
-  componentWillReceiveProps (nextProps: Object) {
-    this.initTimer(nextProps)
-  }
 
   render () {
     const {
@@ -83,11 +57,13 @@ class TimeTracker extends Component {
               />
             </div>
           )}
-          <Button onClick={onAddTimer}>Start a new timer</Button>
+          <ActionContainer>
+            <Button onClick={onAddTimer}>
+              <span aria-label='hourglass' role='img'>⌛</span>Start a new timer
+            </Button>
+          </ActionContainer>
         </Container>
       </div>
     )
   }
 }
-
-export { TimeTracker as default }

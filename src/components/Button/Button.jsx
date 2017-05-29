@@ -11,6 +11,7 @@ const Button = styled.a`
   text-align: center;
   height: 40px;
   line-height: 40px;
+  display: block;
 `
 
 export { Button as default }

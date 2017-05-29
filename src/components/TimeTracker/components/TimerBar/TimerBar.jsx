@@ -15,6 +15,13 @@ const TimerBlock = styled.div`
   height: 10px;
 `
 
+const RaceCar = styled.div`
+  transform: scale(-1, 1);
+  top: -27px;
+  position: relative;
+  font-size: 36px;
+`
+
 // @todo move these to a more central place
 const TOTAL_DAY_TIME = 28800
 const barWidth = time => (time / TOTAL_DAY_TIME) * 100
@@ -32,6 +39,7 @@ const TimerBar = ({
         width={barWidth(timer.seconds)}
       />
     ))}
+    <RaceCar><span aria-label='racecar' role='img'>🏎️</span></RaceCar>
   </Container>
 )
 

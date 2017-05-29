@@ -25,15 +25,15 @@ const Container = styled.div`
 `
 
 const theme = {
-  primaryColor: '#05668D',
-  secondaryColor: '#028090',
+  primaryColor: '#2980b9',
+  secondaryColor: '#2980b9',
   timerColor: (index: number) => {
     const colors = [
-      '#06AED5',
-      '#086788',
-      '#F0C808',
-      '#FFF1D0',
-      '#DD1C1A'
+      '#e74c3c',
+      '#2980b9',
+      '#e67e22',
+      '#95a5a6',
+      '#2c3e50'
     ]
 
     if (index < colors.length) {

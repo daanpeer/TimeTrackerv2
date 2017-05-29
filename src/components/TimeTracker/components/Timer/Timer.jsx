@@ -17,6 +17,15 @@ const Container = styled.div`
   align-items: center;
 `
 
+const ActionContainer = styled.div`
+  display: flex;
+  margin-right: 5px;
+`
+
+const Spacing = styled.div`
+  width: 10px;
+`
+
 const TimeContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -88,15 +97,18 @@ export default class Timer extends Component {
     return (
       <Container>
         <Time seconds={this.state.seconds} />
-        <Button>
-          Delete
-        </Button>
-        <Button onClick={this.handleToggleTimer}>
-          <TimeContainer>
-            {this.props.running ? `Stop` : 'Start' }&nbsp;
-            <Spinner running={this.props.running} />
-          </TimeContainer>
-        </Button>
+        <ActionContainer>
+          <Button>
+            <span aria-label='delete' role='img'>🗑️</span> Delete
+          </Button>
+          <Spacing />
+          <Button onClick={this.handleToggleTimer}>
+            <TimeContainer>
+              {this.props.running ? `✋ Stop` : '🏁 Start' }&nbsp;
+              <Spinner running={this.props.running} />
+            </TimeContainer>
+          </Button>
+        </ActionContainer>
       </Container>
     )
   }
