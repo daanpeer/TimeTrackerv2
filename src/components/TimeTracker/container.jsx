@@ -37,16 +37,15 @@ class TimeTracker extends Component {
 
   componentDidMount () {
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        if (this.state.runningTimer !== undefined && this.state.runningTimer !== null) {
-          const timer = this.state.timers[this.state.runningTimer]
-          if (timer) {
-            this.timerStorage.updateTime(this.state.runningTimer, timer)
-          }
+      if (!document.hidden &&
+          this.state.runningTimer !== undefined &&
+          this.state.runningTimer !== null) {
+        const timer = this.state.timers[this.state.runningTimer]
+        if (timer) {
+          this.timerStorage.updateTime(this.state.runningTimer, timer)
         }
       }
     })
-
     this.timerStorage.onTimetrackerChange(this.updateTimetrackerState)
   }
 
@@ -72,6 +71,18 @@ class TimeTracker extends Component {
     })
   }
 
+  handleTick = (id: string) => {
+    this.setState({
+      timers: {
+        ...this.state.timers,
+        [id]: {
+          ...this.state.timers[id],
+          seconds: this.state.timers[id].seconds + 1
+        }
+      }
+    })
+  }
+
   render () {
     if (this.state.loading) {
       return null
@@ -89,6 +100,7 @@ class TimeTracker extends Component {
       onStopTimer={this.handleStopTimer}
       onStartTimer={this.handleStartTimer}
       onAddTimer={this.handleAddTimer}
+      onTick={this.handleTick}
       running={this.state.runningTimer !== undefined}
     />)
   }

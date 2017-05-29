@@ -10,11 +10,13 @@ const Container = styled.div`
 const TimerList = ({
   timers,
   onStopTimer,
-  onStartTimer
+  onStartTimer,
+  onTick
 }: {
   timers: Array<Timer>,
   onStopTimer: (id: string) => void,
-  onStartTimer: (id: string) => void
+  onStartTimer: (id: string) => void,
+  onTick: (id: string) => void
 }) => (
   <Container>
     {timers.map((timer, key) => (
@@ -24,6 +26,7 @@ const TimerList = ({
         running={timer.startDate !== undefined}
         onStartTimer={() => { onStartTimer(timer.id) }}
         onStopTimer={() => { onStopTimer(timer.id) }}
+        onTick={() => { onTick(timer.id) }}
       />
     ))}
   </Container>

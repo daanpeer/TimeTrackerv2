@@ -37,6 +37,7 @@ export default class Timer extends Component {
     seconds: number,
     onStartTimer: () => void,
     onStopTimer: () => void,
+    onTick: () => void,
   }
 
   state: {
@@ -50,10 +51,6 @@ export default class Timer extends Component {
 
     this.timer = undefined
     this.initTimer(props)
-
-    this.state = {
-      seconds: props.seconds
-    }
   }
 
   componentWillReceiveProps (newProps: Object) {
@@ -72,9 +69,7 @@ export default class Timer extends Component {
   initTimer = (props: { running: bool }) => {
     if (props.running && this.timer === undefined) {
       this.timer = setInterval(() => {
-        this.setState({
-          seconds: this.state.seconds + 1
-        })
+        this.props.onTick()
       }, 1000)
     } else if (!props.running) {
       this.clearTimers()
@@ -96,7 +91,7 @@ export default class Timer extends Component {
   render () {
     return (
       <Container>
-        <Time seconds={this.state.seconds} />
+        <Time seconds={this.props.seconds} />
         <ActionContainer>
           <Button>
             <span aria-label='delete' role='img'>🗑️</span> Delete

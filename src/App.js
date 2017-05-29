@@ -30,7 +30,7 @@ const theme = {
   timerColor: (index: number) => {
     const colors = [
       '#e74c3c',
-      '#2980b9',
+      '#8e44ad',
       '#e67e22',
       '#95a5a6',
       '#2c3e50'
