@@ -19,3 +19,5 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 - [ ] Add Emoji font so that the Emoji look the same on every device
 - [ ] Fix Flow typing
 - [ ] Add react-snapshot for server-side rendering
+- [ ] Add loading state
+- [ ] Add logout button
