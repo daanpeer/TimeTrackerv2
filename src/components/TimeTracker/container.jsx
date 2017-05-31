@@ -23,7 +23,7 @@ export default class TimeTracker extends Component {
     this.state = {
       loading: true,
       running: false,
-      timers: {},
+      timers: {}
     }
 
     this.timerStorage = new TimerStorage(props.user.uid)
