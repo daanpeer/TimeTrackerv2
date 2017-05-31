@@ -9,9 +9,11 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 - [x] Deploy to S3
 - [ ] Add Helmet lib for title
 - [x] Add own favicon
-- [ ] Update color scheme
+- [x] Update color scheme
 - [x] Add manifest
 - [x] Configure SW
 - [x] Enable gzip compression in amazon
 - [ ] Move google auth to a separate component
 - [x] Fix bug when moving to and from the browser tab
+- [ ] Styled components insert a new style every timer cycle
+- [ ] Add Emoji font so that the Emoji look the same on every device
