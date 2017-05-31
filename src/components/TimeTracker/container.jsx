@@ -13,7 +13,6 @@ export default class TimeTracker extends Component {
     timers: { [string]: Timer },
     running: bool,
     loading: bool,
-    runningTimer: ?string,
   }
 
   timerStorage: Object
@@ -25,7 +24,6 @@ export default class TimeTracker extends Component {
       loading: true,
       running: false,
       timers: {},
-      runningTimer: undefined
     }
 
     this.timerStorage = new TimerStorage(props.user.uid)
@@ -37,14 +35,7 @@ export default class TimeTracker extends Component {
 
   componentDidMount () {
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden &&
-          this.state.runningTimer !== undefined &&
-          this.state.runningTimer !== null) {
-        const timer = this.state.timers[this.state.runningTimer]
-        if (timer) {
-          this.timerStorage.updateTimerTransaction()
-        }
-      }
+      this.timerStorage.updateTimerTransaction()
     })
     this.timerStorage.onTimetrackerChange(this.updateTimetrackerState)
   }
@@ -96,7 +87,6 @@ export default class TimeTracker extends Component {
       onAddTimer={this.handleAddTimer}
       onDeleteTimer={this.handleDeleteTimer}
       onTick={this.handleTick}
-      running={this.state.runningTimer !== undefined}
     />)
   }
 }

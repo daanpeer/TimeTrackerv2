@@ -50,6 +50,12 @@ export default class TimeTrackerStorage {
     return Math.floor((addedTime + runningTimer.seconds))
   }
 
+  getTotalTime = (timetracker) => {
+    return Object.keys(timetracker.timers)
+      .map(key => timetracker.timers[key].seconds)
+      .reduce((a, b) => a + b)
+  }
+
   async addTimer () {
     await this.stopTimerTransaction()
     const timerKey = this.timersRef.push({
@@ -92,7 +98,10 @@ export default class TimeTrackerStorage {
       }
 
       runningTimer.seconds = this.getSeconds(runningTimer)
+      timetracker.totalTime = this.getTotalTime(timetracker)
       runningTimer.startDate = new Date()
+
+      return timetracker;
     })
   }
 
@@ -103,9 +112,7 @@ export default class TimeTrackerStorage {
       }
 
       let newTimetracker = this.stopTimer(timetracker)
-      newTimetracker.totalTime = Object.keys(timetracker.timers)
-        .map(key => timetracker.timers[key].seconds)
-        .reduce((a, b) => a + b)
+      newTimetracker.totalTime = this.getTotalTime(timetracker)
 
       return newTimetracker
     })

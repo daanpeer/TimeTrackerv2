@@ -23,7 +23,6 @@ type TimeTrackerProps = {
   onStartTimer: (id: string) => void,
   onDeleteTimer: (id: string) => void,
   onTick: (id: string) => void,
-  running: bool,
 }
 
 export default class TimeTracker extends Component {
