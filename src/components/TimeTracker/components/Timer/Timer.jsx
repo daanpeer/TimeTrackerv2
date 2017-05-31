@@ -96,12 +96,12 @@ export default class Timer extends Component {
         <Time seconds={this.props.seconds} />
         <ActionContainer>
           <Button onClick={this.props.onDeleteTimer} danger>
-            <span aria-label='delete' role='img'>🗑️</span> Delete
+            <span aria-label='delete' role='img'>🗑️ </span> Delete
           </Button>
           <Spacing />
           <Button onClick={this.handleToggleTimer}>
             <TimeContainer>
-              {this.props.running ? `✋ Stop` : '🏁 Start' }&nbsp;
+              {this.props.running ? `✋ Stop` : '🏁  Start' }&nbsp;
               <Spinner running={this.props.running} />
             </TimeContainer>
           </Button>
