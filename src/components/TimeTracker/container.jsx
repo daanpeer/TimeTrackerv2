@@ -29,8 +29,8 @@ export default class TimeTracker extends Component {
     this.timerStorage = new TimerStorage(props.user.uid)
   }
 
-  updateTimetrackerState = (timers: { [string]: Timer }, runningTimer: string) => {
-    this.setState({ loading: false, timers, runningTimer })
+  updateTimetrackerState = (timers: { [string]: Timer }) => {
+    this.setState({ loading: false, timers })
   }
 
   componentDidMount () {

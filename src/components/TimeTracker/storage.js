@@ -31,18 +31,18 @@ export default class TimeTrackerStorage {
 
   stopTimer = (timetracker) => {
     if (!timetracker.runningTimer) {
-      return timetracker;
+      return timetracker
     }
 
     const runningTimer = timetracker.timers[timetracker.runningTimer]
     if (!runningTimer) {
-      return timetracker; 
+      return timetracker
     }
 
     runningTimer.seconds = this.getSeconds(runningTimer)
     runningTimer.startDate = null
 
-    return timetracker;
+    return timetracker
   }
 
   getSeconds = (runningTimer) => {
@@ -89,19 +89,19 @@ export default class TimeTrackerStorage {
   async updateTimerTransaction (id: string) {
     return this.timetrackerRef.transaction((timetracker) => {
       if (!timetracker.runningTimer) {
-        return timetracker;
+        return timetracker
       }
 
       const runningTimer = timetracker.timers[timetracker.runningTimer]
       if (!runningTimer) {
-        return timetracker; 
+        return timetracker
       }
 
       runningTimer.seconds = this.getSeconds(runningTimer)
       timetracker.totalTime = this.getTotalTime(timetracker)
       runningTimer.startDate = new Date()
 
-      return timetracker;
+      return timetracker
     })
   }
 
