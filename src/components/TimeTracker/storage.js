@@ -86,7 +86,7 @@ export default class TimeTrackerStorage {
     this.timerRef(id).remove()
   }
 
-  async updateTimerTransaction (id: string) {
+  async updateTimerTransaction () {
     return this.timetrackerRef.transaction((timetracker) => {
       if (timetracker === null || !timetracker.runningTimer) {
         return timetracker
@@ -99,7 +99,7 @@ export default class TimeTrackerStorage {
 
       runningTimer.seconds = this.getSeconds(runningTimer)
       timetracker.totalTime = this.getTotalTime(timetracker)
-      runningTimer.startDate = new Date()
+      runningTimer.startDate = new Date().toString()
 
       return timetracker
     })
