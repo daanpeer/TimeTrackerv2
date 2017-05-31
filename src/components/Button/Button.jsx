@@ -12,6 +12,7 @@ const Button = styled.a`
   height: 40px;
   line-height: 40px;
   display: block;
+  cursor: pointer;
 `
 
 export { Button as default }
