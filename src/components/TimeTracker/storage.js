@@ -48,11 +48,15 @@ export default class TimeTrackerStorage {
     })
   }
 
-  updateTime = (id: string, timer: Timer, resetDate: bool = false) => {
-    this.database.ref(`${this.timersRef}/${id}`).update({
-      startDate: resetDate ? null : new Date(timer.startDate || new Date()),
-      seconds: diffInSeconds(new Date(timer.startDate || new Date()), new Date()) + timer.seconds
-    })
+  updateTime = (id: string, timer: Timer) => {
+    let addedTime = diffInSeconds(new Date(timer.startDate || new Date()), new Date())
+
+    const params = {
+      seconds: (addedTime + timer.seconds),
+      startDate: new Date().toString()
+    }
+
+    this.database.ref(`${this.timersRef}/${id}`).update(params)
   }
 
   deleteTimer = (id: string) => {
@@ -60,10 +64,15 @@ export default class TimeTrackerStorage {
   }
 
   stopTimer = (id: string, timer: Timer) => {
-    this.database.ref(`${this.timersRef}/${id}`).update({
+    this.updateTime(id, timer)
+
+    // unset the running timer
+    this.database.ref(`${this.timetrackerRef}`).update({
       runningTimer: null
     })
 
-    this.updateTime(id, timer, true)
+    this.database.ref(`${this.timersRef}/${id}`).update({
+      startDate: null
+    })
   }
 }
