@@ -88,7 +88,7 @@ export default class TimeTrackerStorage {
 
   async updateTimerTransaction (id: string) {
     return this.timetrackerRef.transaction((timetracker) => {
-      if (!timetracker.runningTimer) {
+      if (timetracker === null || !timetracker.runningTimer) {
         return timetracker
       }
 
