@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "firebase": "^4.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "styled-components": "^1.4.6",
-    "firebase": "^4.0.0",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "styled-components": "^1.4.6"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",
@@ -40,6 +40,7 @@
     "promise": "7.1.1",
     "react-dev-utils": "^3.0.0",
     "react-error-overlay": "^1.0.7",
+    "standard": "^10.0.2",
     "style-loader": "0.17.0",
     "sw-precache-webpack-plugin": "0.9.1",
     "url-loader": "0.5.8",
