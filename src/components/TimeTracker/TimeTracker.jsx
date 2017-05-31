@@ -65,7 +65,7 @@ export default class TimeTracker extends Component {
           )}
           <ActionContainer>
             <Button onClick={onAddTimer}>
-              <span aria-label='hourglass' role='img'>⌛</span>Start a new timer
+              <span aria-label='hourglass' role='img'>⌛</span> Start a new timer
             </Button>
           </ActionContainer>
         </Container>

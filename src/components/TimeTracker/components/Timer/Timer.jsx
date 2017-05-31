@@ -31,30 +31,31 @@ const TimeContainer = styled.div`
   flex-direction: row;
 `
 
-export default class Timer extends Component {
-  props: {
-    running: bool,
-    seconds: number,
-    onStartTimer: () => void,
-    onStopTimer: () => void,
-    onTick: () => void,
-    onDeleteTimer: () => void,
-  }
+type TimerProps = {
+  running: bool,
+  seconds: number,
+  onStartTimer: () => void,
+  onStopTimer: () => void,
+  onTick: () => void,
+  onDeleteTimer: () => void,
+};
 
+export default class Timer extends Component {
+  props: TimerProps
   state: {
     seconds: number,
   }
 
   timer: ?number
 
-  constructor (props: Object) {
+  constructor (props: TimerProps) {
     super(props)
 
     this.timer = undefined
     this.initTimer(props)
   }
 
-  componentWillReceiveProps (newProps: Object) {
+  componentWillReceiveProps (newProps: TimerProps) {
     this.setState({
       seconds: newProps.seconds
     })

@@ -4,7 +4,7 @@ import TimeTrackerComponent from './TimeTracker'
 import type { Timer } from '../../types'
 import TimerStorage from './storage'
 
-class TimeTracker extends Component {
+export default class TimeTracker extends Component {
   handleStopTimer = () => {}
   handleStartTimer = () => {}
   handleAddTimer = () => {}
@@ -42,7 +42,7 @@ class TimeTracker extends Component {
           this.state.runningTimer !== null) {
         const timer = this.state.timers[this.state.runningTimer]
         if (timer) {
-          this.timerStorage.updateTime(this.state.runningTimer, timer)
+          this.timerStorage.updateTimerTransaction()
         }
       }
     })
@@ -53,22 +53,12 @@ class TimeTracker extends Component {
     this.timerStorage.addTimer()
   }
 
-  handleStopTimer = (id: string) => {
-    // get the timer from the object
-    this.timerStorage.stopTimer(id, this.state.timers[id])
-    this.setState({ runningTimer: null })
+  handleStopTimer = () => {
+    this.timerStorage.stopTimerTransaction()
   }
 
   handleStartTimer = (id: string) => {
-    let runningTimer
-    if (this.state.runningTimer !== undefined && this.state.runningTimer !== null) {
-      runningTimer = this.state.timers[this.state.runningTimer]
-    }
-
-    this.timerStorage.startTimer(id, this.state.runningTimer, runningTimer)
-    this.setState({
-      runningTimer: id
-    })
+    this.timerStorage.startTimerTransaction(id)
   }
 
   handleTick = (id: string) => {
@@ -110,5 +100,3 @@ class TimeTracker extends Component {
     />)
   }
 }
-
-export { TimeTracker as default }
