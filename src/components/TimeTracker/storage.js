@@ -67,7 +67,7 @@ export default class TimeTrackerStorage {
 
   async startTimerTransaction (id: string) {
     return this.timetrackerRef.transaction((timetracker) => {
-      if (!timetracker.timers || timetracker === null || timetracker === undefined) {
+      if (timetracker === null || !timetracker.timers || timetracker === undefined) {
         return
       }
 
@@ -107,7 +107,7 @@ export default class TimeTrackerStorage {
 
   async stopTimerTransaction () {
     return this.timetrackerRef.transaction((timetracker) => {
-      if (!timetracker.timers || timetracker === null || timetracker === undefined) {
+      if (timetracker === null || !timetracker.timers || timetracker === undefined) {
         return
       }
 
