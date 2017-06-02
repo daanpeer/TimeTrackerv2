@@ -1,9 +1,10 @@
 /* @flow */
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import Spinner from 'react-spinkit'
 import Time from './Time'
 import Button from '../../../Button'
-import Spinner from '../../../Spinner'
+import './timer.css'
 
 const Container = styled.div`
   display: flex;
@@ -90,6 +91,19 @@ export default class Timer extends Component {
     this.props.onStartTimer()
   }
 
+  renderRunning = () => {
+    if (this.props.running) {
+      return (
+        <TimeContainer>
+          ✋ Stop
+          <Spinner className='timer-spinner' name='ball-scale-ripple' color='white' />
+        </TimeContainer>
+      )
+    }
+
+    return (<TimeContainer>🏁  Start</TimeContainer>)
+  }
+
   render () {
     return (
       <Container>
@@ -100,10 +114,7 @@ export default class Timer extends Component {
           </Button>
           <Spacing />
           <Button onClick={this.handleToggleTimer}>
-            <TimeContainer>
-              {this.props.running ? `✋ Stop` : '🏁  Start' }&nbsp;
-              <Spinner running={this.props.running} />
-            </TimeContainer>
+            {this.renderRunning()}
           </Button>
         </ActionContainer>
       </Container>

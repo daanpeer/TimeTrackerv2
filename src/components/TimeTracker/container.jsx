@@ -69,10 +69,6 @@ export default class TimeTracker extends Component {
   }
 
   render () {
-    if (this.state.loading) {
-      return null
-    }
-
     let timers
     if (this.state.timers) {
       timers = Object.keys(this.state.timers).map((id: string) => {
@@ -87,6 +83,7 @@ export default class TimeTracker extends Component {
       onAddTimer={this.handleAddTimer}
       onDeleteTimer={this.handleDeleteTimer}
       onTick={this.handleTick}
+      loading={this.state.loading}
     />)
   }
 }
