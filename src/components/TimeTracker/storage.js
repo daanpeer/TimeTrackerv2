@@ -57,7 +57,7 @@ export default class TimeTrackerStorage {
   }
 
   async addTimer () {
-    await this.stopTimerTransaction()
+    this.stopTimerTransaction()
     const timerKey = this.timersRef.push({
       seconds: 0,
       startDate: null
@@ -82,7 +82,7 @@ export default class TimeTrackerStorage {
 
   async deleteTimer (id: string) {
     // if this timer is running we need to stop it
-    await this.stopTimerTransaction(id)
+    this.stopTimerTransaction(id)
     this.timerRef(id).remove()
   }
 
