@@ -95,13 +95,13 @@ export default class Timer extends Component {
     if (this.props.running) {
       return (
         <TimeContainer>
-          ✋ Stop
+          <span aria-label='stop' role='img'>✋ </span>Stop
           <Spinner className='timer-spinner' name='ball-scale-ripple' color='white' />
         </TimeContainer>
       )
     }
 
-    return (<TimeContainer>🏁  Start</TimeContainer>)
+    return (<TimeContainer><span aria-label='start' role='img'>🏁 </span> Start</TimeContainer>)
   }
 
   render () {

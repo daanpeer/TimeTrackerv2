@@ -22,17 +22,3 @@ export const diffInSeconds = (earlier: Date, later: ?Date): number => {
   }
   return (later - earlier) / 1000
 }
-
-export const spinner = (callBack: (value: string) => void, speed: number): number => {
-  const chars = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
-  let currentChar = 0
-
-  return setInterval(() => {
-    if (currentChar === chars.length) {
-      currentChar = 0
-    }
-
-    callBack(chars[currentChar])
-    currentChar++
-  }, speed)
-}
