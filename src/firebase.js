@@ -19,5 +19,6 @@ const config = {
 }
 
 firebase.initializeApp(config)
+firebase.setPersistenceEnabled(true)
 
 export { firebase as default }

@@ -22,3 +22,5 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 - [ ] Add logout button
 - [x] Continue timer on re focus on phone
 - [ ] Add version to page
+- [ ] Look into firebase offline
+- [ ] Push notifications
