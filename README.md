@@ -15,7 +15,7 @@ This is a timetracker built on firebase. This is just a personal fun project usi
 - [x] Look into firebase offline (works already :-))
 - [ ] Implement the functionality to switch dates
 - [ ] Store description per timer
-- [ ] Move google auth to a separate component
+- [x] Move google auth to a separate component
 - [ ] Add Emoji font so that the Emoji look the same on every device
 - [ ] Fix Flow typing
 - [ ] Add react-snapshot for server-side rendering
